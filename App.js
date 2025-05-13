@@ -13,7 +13,7 @@ export default function App() {
         <Stack.Screen 
           name="Home" 
           component={HomeScreen} 
-          options={{ headerShown: false, title: 'Registro de Clientes' }}
+          options={{  title: 'Registro de Clientes' }}
           
         />
         <Stack.Screen 

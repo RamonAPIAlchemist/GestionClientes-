@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Button, Alert,TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 export default function GuardarClientes({ onGuardar }) {
@@ -10,8 +10,12 @@ export default function GuardarClientes({ onGuardar }) {
   const [sexo, setSexo] = useState('');
 
   const guardar = () => {
-    if (!cedula || !nombres) {
-      Alert.alert('Error', 'Cédula y Nombres son obligatorios');
+    if (!cedula || !nombres,
+        !apellidos || !fechaNacimiento,
+        !sexo 
+        
+    ) {
+      Alert.alert('Error', 'Cédula, Nombres, Apellidos, fechaNacimiento y sexo son obligatorios');
       return;
     }
 
@@ -30,13 +34,13 @@ export default function GuardarClientes({ onGuardar }) {
     setSexo('');
 
     onGuardar(nuevoCliente);
-    
+
     Alert.alert(
       'Datos almacenados',
       `Cédula: ${cedula}\nNombres: ${nombres}\nApellidos: ${apellidos}\nFecha Nacimiento: ${fechaNacimiento}\nSexo: ${sexo}`
     );
 
-   
+
   };
 
   return (
@@ -86,22 +90,26 @@ export default function GuardarClientes({ onGuardar }) {
         </Picker>
       </View>
 
-      <Button
-        title="Guardar Cliente"
+      <TouchableOpacity
+        style={styles.smallButton}
         onPress={guardar}
-        color="green"
-      />
+      >
+        <Text style={styles.smallButtonText}>Guardar Cliente</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
+
+
+
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    backgroundColor: '#f5f5f5',  // Fondo más claro
+    padding: 10,
+    backgroundColor: '#E8F5E9',  // Fondo más claro
   },
   label: {
-   fontSize: 16,
+    fontSize: 16,
     marginTop: 15,
     marginBottom: 8,
     fontWeight: 'bold',
@@ -139,5 +147,20 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 2,                // Para Android
   },
-  
+
+  smallButton: {
+    backgroundColor: '#4CAF50',
+    paddingVertical: 6,          // Reduce la altura
+    paddingHorizontal: 12,       // Reduce el ancho
+    borderRadius: 4,
+    alignSelf: 'center',
+    minWidth: 316,               // Ancho mínimo
+  },
+  smallButtonText: {
+    color: 'white',
+    fontSize: 22,                // Texto más pequeño
+    fontWeight: '500',
+    textAlign: 'center',
+  }
+
 });
